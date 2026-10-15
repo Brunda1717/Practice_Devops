@@ -87,6 +87,7 @@ pipeline {
             }
         }
     }
+<<<<<<< HEAD:jenkinsfile
 
     post {
         success {
@@ -102,3 +103,6 @@ pipeline {
         }
     }
 }
+=======
+}
+>>>>>>> a95626ef0edc15e3039a2ada8e262ea63116614c:Jenkinsfile
