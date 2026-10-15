@@ -209,10 +209,10 @@ pipeline {
 
                     echo "SUCCESS: Website returned an HTTP response."
 
-                    if grep -qi "Wisdom of Indian Saints" /tmp/mevi-site.html; then
-                        echo "SUCCESS: Expected website title was found."
+                    if grep -qi "BookNest" /tmp/mevi-site.html; then
+                        echo "SUCCESS: BookNest website content was found."
                     else
-                        echo "ERROR: Expected website title was not found."
+                        echo "ERROR: Expected BookNest content was not found."
                         echo "Actual page title:"
                         grep -i "<title>" /tmp/mevi-site.html || true
                         exit 1
@@ -237,15 +237,17 @@ pipeline {
                         wget -q -O - http://127.0.0.1/ \
                         > /tmp/mevi-container-page.html
 
-                    if grep -qi "Wisdom of Indian Saints" /tmp/mevi-container-page.html; then
-                        echo "SUCCESS: Website responds inside the container."
+                    if grep -qi "BookNest" /tmp/mevi-container-page.html; then
+                        echo "SUCCESS: BookNest responds inside the container."
                     else
-                        echo "ERROR: Website content verification failed."
+                        echo "ERROR: BookNest content verification failed."
+                        echo "Actual page title:"
+                        grep -i "<title>" /tmp/mevi-container-page.html || true
                         exit 1
                     fi
 
-                    echo "Host port: 8082"
-                    echo "Website URL: http://localhost:8082/"
+                    echo "Host port: $HOST_PORT"
+                    echo "Website URL: http://localhost:$HOST_PORT/"
                 '''
             }
         }
@@ -280,7 +282,7 @@ pipeline {
         success {
             echo '''
             ==========================================
-            PIPELINE SUCCESSFUL!
+                    PIPELINE SUCCESSFUL!
             ==========================================
             GitHub checkout: SUCCESS
             Docker check: SUCCESS
@@ -298,14 +300,14 @@ pipeline {
         failure {
             echo '''
             ==========================================
-            PIPELINE FAILED
+                    PIPELINE FAILED
             ==========================================
             Open Console Output and locate the first
             failed command.
 
             Check Docker access, file names,
             container status, network connectivity,
-            and the expected website title.
+            and the expected website content.
             ==========================================
             '''
 
